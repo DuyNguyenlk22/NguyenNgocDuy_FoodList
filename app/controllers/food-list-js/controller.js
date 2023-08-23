@@ -1,6 +1,6 @@
-export let BASE_URL = "https://64d6fadf2a017531bc12e6f4.mockapi.io/food";
+export const BASE_URL = "https://64d6fadf2a017531bc12e6f4.mockapi.io/food";
 
-const LOAI = true;
+const CHAY_MAN = true;
 const CON_HET = true;
 const CON_MON = true;
 export let render = (list) => {
@@ -9,16 +9,15 @@ export let render = (list) => {
     let { ma, ten, loai, gia, khuyenMai, tinhTrang, img, desc } = item;
     let listTr = /*html*/ `
     <tr>
-      <td>${ma}</td>
-      <td>${ten}</td>
-      <td>${loai == LOAI ? "Chay" : "Mặn"}</td>
-      <td>${gia}</td>
-      <td>${khuyenMai}</td>
-      <td>0</td>
-      <td>${tinhTrang == CON_MON ? "1" : "0"}</td>
-      <td><button class="btn btn-info"onclick="editFood(${ma})">Sửa</button>
-      <button class="btn btn-danger" onclick="deleteFood(${ma})">Xoá</button>
-      </td>
+        <td>${ma}</td>
+        <td>${ten}</td>
+        <td>${loai == CHAY_MAN ? "Mặn" : "Chay"}</td>
+        <td>${gia}</td>
+        <td>${khuyenMai}</td>
+        <td>0</td>
+        <td>${tinhTrang == CON_MON ? "Còn" : "Hết"}</td>
+        <td><button class="btn btn-warning" onclick="editFood(${ma})">Sửa</button>
+        <button class="btn btn-primary" onclick="deleteFood(${ma})">Xoá</button></td>
     </tr>
     `;
     content += listTr;
@@ -41,7 +40,6 @@ export let fetchFoodList = () => {
 export let showMessage = (message, isSuccess = true) => {
   Toastify({
     text: message,
-    className: "info",
     style: {
       background: isSuccess
         ? "linear-gradient(to right, #00b09b, #96c93d)"
@@ -70,11 +68,13 @@ export let getDataForm = () => {
     desc,
   };
 };
+
 export let showDataForm = (data) => {
   let { ma, ten, loai, gia, khuyenMai, tinhTrang, img, desc } = data;
+
   document.getElementById("foodID").value = ma;
   document.getElementById("tenMon").value = ten;
-  document.getElementById("loai").value = loai == LOAI ? "loai1" : "loai2";
+  document.getElementById("loai").value = loai == CHAY_MAN ? "loai1" : "loai2";
   document.getElementById("giaMon").value = gia;
   document.getElementById("khuyenMai").value = khuyenMai;
   document.getElementById("tinhTrang").value = tinhTrang == CON_HET ? "1" : "0";

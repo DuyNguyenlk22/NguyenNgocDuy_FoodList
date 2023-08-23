@@ -9,7 +9,7 @@ import {
 fetchFoodList();
 
 window.deleteFood = (id) => {
-  console.log("🚀 ~ file: main.js:8 ~ window.deleteFood ~ id:", id);
+  console.log("🚀 ~ file: main.js:7 ~ window.deleteFood ~ id:", id);
   axios
     .delete(`${BASE_URL}/${id}`)
     .then((res) => {
@@ -44,6 +44,7 @@ window.editFood = (id) => {
     .then((res) => {
       console.log(res);
       $("#exampleModal").modal("show");
+      document.getElementById("foodID").readOnly = true;
       showDataForm(res.data);
     })
     .catch((err) => {
